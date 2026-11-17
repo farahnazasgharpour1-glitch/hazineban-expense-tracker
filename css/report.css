@@ -1,0 +1,52 @@
+@font-face {
+  font-family: "Estedad";
+  src: url("../assets/fonts/Estedad.woff") format("woff");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; padding: 34px; color: #17223d; background: #fff; font-family: "Estedad", Tahoma, sans-serif; line-height: 1.8; }
+.report { max-width: 1100px; margin: 0 auto; }
+.report-head { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-bottom: 18px; margin-bottom: 24px; border-bottom: 2px solid #dce4f1; }
+.brand { color: #172a50; font-size: 22px; font-weight: 700; }
+.sub { color: #6c7891; font-size: 12px; }
+.period { color: #465775; font-size: 14px; }
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 22px; }
+.stat { padding: 14px; border: 1px solid #e1e7f0; border-radius: 12px; background: #f8faff; }
+.stat small { display: block; color: #6c7891; }
+.stat strong { font-size: 17px; }
+.report h2 { margin: 18px 0 8px; font-size: 17px; }
+.report-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.report-table th, .report-table td { padding: 9px; border-bottom: 1px solid #e4e9f1; text-align: right; }
+.report-table th { color: #52617d; background: #f1f5fb; }
+.footer { padding-top: 12px; margin-top: 24px; border-top: 1px solid #e4e9f1; color: #71809a; font-size: 11px; }
+@media (max-width: 700px) {
+  body { padding: 15px; }
+  .stats { grid-template-columns: repeat(2, 1fr); }
+  .report-head { align-items: flex-start; flex-direction: column; }
+  .report-table { font-size: 10px; }
+  .report-table th, .report-table td { padding: 6px 4px; }
+}
+@media print {
+  @page { size: A4 landscape; margin: 12mm; }
+  body { padding: 0; }
+  .report { max-width: none; }
+  .stat, .report-table tr { break-inside: avoid; }
+  .report-table thead { display: table-header-group; }
+}
+
+
+/* Responsive print/report page — never widen the viewport. */
+html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
+.report { width: 100%; min-width: 0; max-width: 1100px; margin-inline: auto; }
+.report-table { width: 100%; table-layout: fixed; overflow-wrap: anywhere; }
+.report-table th, .report-table td { overflow-wrap: anywhere; }
+@media (max-width: 700px) {
+  body { padding: 15px 12px; }
+  .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .report-head { align-items: flex-start; flex-direction: column; }
+  .report-table { font-size: 10.5px; }
+  .report-table th, .report-table td { padding: 6px 4px; }
+}

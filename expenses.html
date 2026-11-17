@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#101a33" id="themeColorMeta" />
+  <meta name="description" content="هزینه‌بان؛ نمونه‌کار تعاملی مدیریت هزینه با ثبت و ویرایش رکوردها، بودجه ماهانه، نمودارهای تحلیلی و گزارش مالی." />
+  <meta name="robots" content="noindex, nofollow, noarchive" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="fa_IR" />
+  <meta property="og:title" content="هزینه‌بان | داشبورد مدیریت هزینه‌ها" />
+  <meta property="og:description" content="نمونه‌کار فرانت‌اند برای ثبت و تحلیل هزینه‌ها، کنترل بودجه، گزارش‌گیری و پشتیبان‌گیری محلی." />
+  <meta property="og:image" content="assets/images/og-image.jpg" />
+  <meta property="og:image:alt" content="پیش‌نمایش داشبورد هزینه‌بان" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="هزینه‌بان | داشبورد مدیریت هزینه‌ها" />
+  <meta name="twitter:description" content="نمونه‌کار تعاملی مدیریت و تحلیل هزینه‌ها." />
+  <meta name="twitter:image" content="assets/images/og-image.jpg" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'; img-src 'self' data:; font-src 'self' data:; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self'" />
+  <title>هزینه‌بان | مدیریت هزینه‌ها</title>
+  <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml" />
+  <link rel="preload" href="assets/fonts/Estedad.woff" as="font" type="font/woff" crossorigin />
+  <link rel="stylesheet" href="css/style.css?v=2.8.0" />
+</head>
+<body data-page="expenses">
+  <a class="skip-link" href="#mainContent">پرش به محتوای اصلی</a>
+  <div class="app" id="app">
+    <aside class="sidebar" id="sidebar" aria-label="منوی اصلی">
+      <a class="sidebar__brand" href="index.html" aria-label="هزینه‌بان، صفحه اصلی">
+        <span class="brand__mark" aria-hidden="true"><i></i><i></i><i></i><b></b></span>
+        <span class="brand__copy">
+          <strong>هزینه‌بان</strong>
+          <small>مدیریت هوشمند هزینه‌ها</small>
+        </span>
+      </a>
+
+      <nav class="sidebar__nav" aria-label="بخش‌های برنامه">
+        <a href="index.html" class="nav__link" data-nav data-page-link="dashboard"><span class="nav__icon" aria-hidden="true">▦</span> داشبورد</a>
+        <a href="expenses.html" class="nav__link" data-nav data-page-link="expenses"><span class="nav__icon" aria-hidden="true">☷</span> هزینه‌ها</a>
+        <a href="budget.html" class="nav__link" data-nav data-page-link="budget"><span class="nav__icon" aria-hidden="true">◷</span> بودجه‌ها</a>
+        <a href="reports.html" class="nav__link" data-nav data-page-link="reports"><span class="nav__icon" aria-hidden="true">⌁</span> گزارش‌ها</a>
+        <a href="settings.html" class="nav__link" data-nav data-page-link="settings"><span class="nav__icon" aria-hidden="true">⚙</span> تنظیمات و داده‌ها</a>
+<a href="help.html" class="nav__link" data-nav data-page-link="help"><span class="nav__icon" aria-hidden="true">?</span> راهنمای استفاده</a>
+      </nav>
+
+      <div class="sidebar__tip">
+        <span class="sidebar__tip-icon" aria-hidden="true">✦</span>
+        <strong>تصمیم بهتر با داده روشن</strong>
+        <p>هزینه‌ها را ثبت کن، روند را ببین و بودجه را کنترل کن.</p>
+      </div>
+    </aside>
+
+    <div class="overlay" id="overlay" hidden></div>
+
+    <main class="main" id="mainContent">
+      <header class="topbar">
+        <button class="btn btn--icon menu-btn" id="menuBtn" type="button" aria-label="باز کردن منو" aria-expanded="false" aria-controls="sidebar">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" /></svg>
+        </button>
+        <div class="topbar__title">
+          <h1 id="pageHeading">نمای کلی</h1>
+          <p class="muted" id="todayLabel"></p>
+        </div>
+        <div class="topbar__actions">
+          <button class="btn btn--icon theme-toggle" id="themeToggle" type="button" aria-label="فعال‌کردن حالت تاریک" aria-pressed="false" title="تغییر پوسته">
+            <svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.2 15.2A8.5 8.5 0 0 1 8.8 3.8 8.7 8.7 0 1 0 20.2 15.2Z" /></svg>
+            <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" /></svg>
+          </button>
+          <button class="btn btn--primary" id="openFormBtn" type="button"><span aria-hidden="true">＋</span> هزینه جدید</button>
+        </div>
+      </header>
+
+      <div class="page-intro" data-page-view="expenses"><span class="page-intro__icon" aria-hidden="true">i</span><p><strong>ثبت و پیگیری هزینه‌ها</strong><span>هزینه جدید را ثبت کن، سپس از جست‌وجو و فیلترها برای پیدا کردن و مدیریت رکوردها استفاده کن.</span></p><a href="help.html#guide-expenses">روش ثبت هزینه <span aria-hidden="true">←</span></a></div>
+
+      <section class="hero-panel" data-page-view="dashboard" aria-label="نمای کلی مدیریت هزینه">
+        <div class="hero-panel__content">
+          <span class="hero-kicker"><span class="live-dot"></span> دید شفاف‌تر به جریان مالی</span>
+          <h2>هزینه‌ها را ببین،<br /><em>هوشمندانه‌تر تصمیم بگیر.</em></h2>
+          <p>ثبت، پیگیری و تحلیل هزینه‌ها در یک فضای ساده و منظم؛ همراه با کنترل بودجه و گزارش‌گیری.</p>
+          <div class="hero-tags">
+            <span>کنترل بودجه</span><span>تحلیل روند</span><span>گزارش‌گیری</span>
+          </div>
+        </div>
+        <div class="hero-panel__visual" aria-hidden="true">
+          <svg class="hero-chart" viewBox="0 0 620 270" preserveAspectRatio="xMidYMid meet">
+            <defs>
+              <linearGradient id="chartStroke" x1="0" y1="1" x2="1" y2="0">
+                <stop offset="0" stop-color="#66d9c1" />
+                <stop offset="1" stop-color="#b6a5ff" />
+              </linearGradient>
+              <linearGradient id="chartFill" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#7ce4d0" stop-opacity=".28" />
+                <stop offset="1" stop-color="#7ce4d0" stop-opacity="0" />
+              </linearGradient>
+              <pattern id="chartGrid" width="54" height="42" patternUnits="userSpaceOnUse">
+                <path d="M54 0H0V42" fill="none" stroke="#ffffff" stroke-opacity=".12" stroke-width="1" />
+              </pattern>
+            </defs>
+            <rect x="0" y="0" width="620" height="270" fill="url(#chartGrid)" />
+            <path d="M18 235 C85 218 92 205 145 211 S220 174 272 185 S342 142 390 151 S469 94 515 112 S570 58 610 32 L610 270 L18 270Z" fill="url(#chartFill)" />
+            <path d="M18 235 C85 218 92 205 145 211 S220 174 272 185 S342 142 390 151 S469 94 515 112 S570 58 610 32" fill="none" stroke="url(#chartStroke)" stroke-width="4" stroke-linecap="round" />
+            <g fill="#101a33" stroke="#8ce8d4" stroke-width="3">
+              <circle cx="145" cy="211" r="6"/><circle cx="272" cy="185" r="6"/><circle cx="390" cy="151" r="6"/><circle cx="515" cy="112" r="6"/><circle cx="610" cy="32" r="7"/>
+            </g>
+            <g fill="#ffffff" fill-opacity=".55"><circle cx="145" cy="211" r="2"/><circle cx="272" cy="185" r="2"/><circle cx="390" cy="151" r="2"/><circle cx="515" cy="112" r="2"/></g>
+          </svg>
+          <div class="hero-floating hero-floating--top"><span class="hero-floating__dot"></span><span>روند قابل پیگیری</span></div>
+          <div class="hero-floating hero-floating--bottom"><small>نگاه یکپارچه به هزینه‌ها</small><strong>از ثبت تا تحلیل</strong></div>
+        </div>
+        <div class="hero-orb hero-orb--one"></div><div class="hero-orb hero-orb--two"></div>
+      </section>
+
+      <section id="summary" class="metrics" data-page-view="dashboard" aria-label="خلاصه وضعیت">
+        <article class="metric metric--total">
+          <span class="metric__top"><span class="metric__label">جمع هزینه‌ها</span><span class="metric__icon" aria-hidden="true">↗</span></span>
+          <strong class="metric__value" id="mTotal">۰</strong>
+          <span class="metric__hint">مجموع مبالغ ثبت‌شده · ریال</span>
+        </article>
+        <article class="metric metric--count">
+          <span class="metric__top"><span class="metric__label">تعداد رکوردها</span><span class="metric__icon" aria-hidden="true">▤</span></span>
+          <strong class="metric__value" id="mCount">۰</strong>
+          <span class="metric__hint">کل هزینه‌های ثبت‌شده</span>
+        </article>
+        <article class="metric metric--pending">
+          <span class="metric__top"><span class="metric__label">در انتظار بررسی</span><span class="metric__icon" aria-hidden="true">◷</span></span>
+          <strong class="metric__value" id="mPending">۰</strong>
+          <span class="metric__hint">مبلغ نیازمند تصمیم‌گیری · ریال</span>
+        </article>
+        <article class="metric metric--approved">
+          <span class="metric__top"><span class="metric__label">تأییدشده</span><span class="metric__icon" aria-hidden="true">✓</span></span>
+          <strong class="metric__value" id="mApproved">۰</strong>
+          <span class="metric__hint">مبلغ تأییدشده · ریال</span>
+        </article>
+      </section>
+
+      <section class="dashboard-shortcuts" data-page-view="dashboard" aria-labelledby="shortcutsTitle">
+        <div class="dashboard-shortcuts__head"><div><span class="section-kicker">دسترسی سریع</span><h2 id="shortcutsTitle">از کجا شروع کنیم؟</h2></div><span class="muted">هر بخش در صفحه مستقل خودش</span></div>
+        <div class="shortcut-grid">
+          <a class="shortcut-card" href="expenses.html"><span class="shortcut-card__icon">＋</span><span><strong>ثبت و مدیریت هزینه</strong><small>افزودن، ویرایش و پیگیری رکوردها</small></span><span class="shortcut-card__arrow" aria-hidden="true">←</span></a>
+          <a class="shortcut-card" href="budget.html"><span class="shortcut-card__icon">◷</span><span><strong>برنامه‌ریزی بودجه</strong><small>تنظیم سقف و مشاهده هشدارها</small></span><span class="shortcut-card__arrow" aria-hidden="true">←</span></a>
+          <a class="shortcut-card" href="reports.html"><span class="shortcut-card__icon">⌁</span><span><strong>گزارش و تحلیل</strong><small>نمودارها و خروجی PDF</small></span><span class="shortcut-card__arrow" aria-hidden="true">←</span></a>
+          <a class="shortcut-card" href="settings.html"><span class="shortcut-card__icon">⚙</span><span><strong>مدیریت اطلاعات</strong><small>پشتیبان‌گیری و بازیابی داده‌ها</small></span><span class="shortcut-card__arrow" aria-hidden="true">←</span></a>
+        </div>
+      </section>
+
+      <section id="budget" class="card budget-card" data-page-view="budget">
+        <div class="card__head">
+          <div><span class="section-kicker">برنامه‌ریزی مالی</span><h2>بودجه ماهانه</h2></div>
+          <span class="muted" id="budgetMonthLabel">ماه جاری</span>
+        </div>
+        <div class="budget-layout">
+          <div class="budget-summary">
+            <div class="budget-summary__line"><span>مصرف‌شده از بودجه</span><strong id="budgetPercent">۰٪</strong></div>
+            <div class="budget-track" id="budgetTrack" role="progressbar" aria-label="میزان مصرف بودجه" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="budgetProgress"></span></div>
+            <div class="budget-figures"><div><small>هزینه‌های این ماه</small><strong id="budgetSpent">۰ ریال</strong></div><div><small>بودجه تعیین‌شده</small><strong id="budgetLimit">تعیین نشده</strong></div><div><small>مانده بودجه</small><strong id="budgetRemaining">—</strong></div></div>
+            <p class="budget-alert" id="budgetAlert" role="status">برای شروع، بودجه ماهانه را تعیین کن.</p>
+          </div>
+          <form class="budget-form" id="budgetForm">
+            <div class="field"><label for="budgetMonth">ماه بودجه (شمسی)</label><div class="date-control"><input id="budgetMonth" name="month" type="text" inputmode="numeric" autocomplete="off" placeholder="۱۴۰۵/۰۸" aria-describedby="budgetMonthHint budgetMonthError" required /><button class="calendar-trigger" type="button" data-calendar-target="budgetMonth" data-calendar-mode="month" aria-label="انتخاب ماه شمسی" aria-haspopup="dialog" aria-controls="jalaliDialog"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="16" rx="2"/><path d="M8 3v4m8-4v4M4 9h16"/></svg></button></div><small class="field__hint" id="budgetMonthHint">ماه را وارد کن یا از تقویم انتخاب کن.</small><small class="field__error" id="budgetMonthError" data-error-for="budgetMonth" aria-live="polite"></small></div>
+            <div class="field"><label for="budgetAmount">سقف بودجه (ریال)</label><input id="budgetAmount" name="amount" type="text" inputmode="numeric" autocomplete="off" placeholder="مثلاً ۱۰۰٬۰۰۰٬۰۰۰" required /></div>
+            <button class="btn btn--primary" type="submit">ذخیره بودجه</button>
+          </form>
+        </div>
+        <p class="micro-note">هشدار در ۸۰٪ بودجه فعال می‌شود؛ هزینه‌های ردشده در محاسبه مصرف لحاظ نمی‌شوند.</p>
+      </section>
+
+      <section id="chart" class="card chart-card" data-page-view="reports">
+        <div class="card__head"><div><span class="section-kicker">الگوی مصرف</span><h2>گزارش‌ها و تحلیل هزینه</h2><span class="muted">بر پایه اطلاعات ثبت‌شده</span></div><button class="btn btn--soft" id="reportBtn" type="button"><span aria-hidden="true">▤</span> چاپ / ذخیره PDF</button></div>
+        <div class="charts-layout">
+          <div class="chart" id="chartBars" role="img" aria-label="نمودار میله‌ای هزینه به تفکیک دسته"></div>
+          <div class="chart-donut" id="chartDonut" aria-label="نمودار سهم دسته‌های هزینه"></div>
+        </div>
+      </section>
+
+      <dialog class="expense-drawer" id="expenseDrawer" aria-labelledby="formTitle">
+      <section id="form" class="card form-card">
+        <div class="card__head"><div><span class="section-kicker">ثبت و پیگیری</span><h2 id="formTitle">ثبت هزینه جدید</h2></div><button class="btn btn--icon drawer-close" id="closeFormDrawerBtn" type="button" aria-label="بستن فرم">×</button></div>
+        <form class="form" id="expenseForm" novalidate>
+          <input id="editId" name="editId" type="hidden" />
+          <div class="field"><label for="fTitle">شرح هزینه *</label><input id="fTitle" name="title" type="text" required maxlength="120" placeholder="مثال: خرید تجهیزات اداری" autocomplete="off" aria-describedby="fTitleError" /><small class="field__error" id="fTitleError" data-error-for="fTitle" aria-live="polite"></small></div>
+          <div class="field"><label for="fAmount">مبلغ (ریال) *</label><input id="fAmount" name="amount" type="text" inputmode="numeric" autocomplete="off" required placeholder="۱٬۲۵۰٬۰۰۰" aria-describedby="fAmountError" /><small class="field__error" id="fAmountError" data-error-for="fAmount" aria-live="polite"></small></div>
+          <div class="field"><label for="fCategory">دسته *</label><select id="fCategory" name="category" required aria-describedby="fCategoryError"><option value="">انتخاب کنید…</option><option value="travel">سفر و مأموریت</option><option value="office">اداری و دفتری</option><option value="it">فناوری اطلاعات</option><option value="marketing">بازاریابی</option><option value="salary">حقوق و دستمزد</option><option value="other">سایر</option></select><small class="field__error" id="fCategoryError" data-error-for="fCategory" aria-live="polite"></small></div>
+          <div class="field"><label for="fDepartment">واحد سازمانی *</label><select id="fDepartment" name="department" required aria-describedby="fDepartmentError"><option value="">انتخاب کنید…</option><option value="sales">فروش</option><option value="it">فنی</option><option value="hr">منابع انسانی</option><option value="finance">مالی</option></select><small class="field__error" id="fDepartmentError" data-error-for="fDepartment" aria-live="polite"></small></div>
+          <div class="field"><label for="fVendor">طرف حساب / تأمین‌کننده</label><input id="fVendor" name="vendor" type="text" maxlength="80" placeholder="مثال: شرکت تأمین‌کننده" /></div>
+          <div class="field"><label for="fDate">تاریخ (شمسی) *</label><div class="date-control"><input id="fDate" name="date" type="text" inputmode="numeric" autocomplete="off" placeholder="۱۴۰۵/۰۸/۲۶" required aria-describedby="fDateHint fDateError" /><button class="calendar-trigger" type="button" data-calendar-target="fDate" data-calendar-mode="date" aria-label="انتخاب تاریخ شمسی" aria-haspopup="dialog" aria-controls="jalaliDialog"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="16" rx="2"/><path d="M8 3v4m8-4v4M4 9h16"/></svg></button></div><small class="field__hint" id="fDateHint">تاریخ را وارد کن یا از تقویم شمسی انتخاب کن.</small><small class="field__error" id="fDateError" data-error-for="fDate" aria-live="polite"></small></div>
+          <div class="field field--full"><label for="fNote">توضیحات</label><textarea id="fNote" name="note" rows="2" maxlength="300" placeholder="جزئیات تکمیلی هزینه (اختیاری)"></textarea></div>
+          <div class="form__actions field--full"><button class="btn btn--primary" id="saveExpenseBtn" type="submit">ثبت هزینه</button><button class="btn btn--ghost" type="reset">پاک کردن فرم</button><button class="btn btn--text" id="cancelEditBtn" type="button" hidden>انصراف از ویرایش</button></div>
+        </form>
+      </section>
+      </dialog>
+
+      <section id="list" class="card list-card" data-page-view="expenses">
+        <div class="card__head"><div><span class="section-kicker">مدیریت رکوردها</span><h2>فهرست هزینه‌ها</h2></div><span class="muted" id="resultCount"></span></div>
+        <div class="toolbar">
+          <div class="field field--inline"><label for="q">جستجو</label><input id="q" type="search" placeholder="شرح، تأمین‌کننده یا توضیحات…" /></div>
+          <div class="field field--inline"><label for="fltCategory">دسته</label><select id="fltCategory"><option value="">همه دسته‌ها</option><option value="travel">سفر و مأموریت</option><option value="office">اداری و دفتری</option><option value="it">فناوری اطلاعات</option><option value="marketing">بازاریابی</option><option value="salary">حقوق و دستمزد</option><option value="other">سایر</option></select></div>
+          <div class="field field--inline"><label for="fltStatus">وضعیت</label><select id="fltStatus"><option value="">همه وضعیت‌ها</option><option value="pending">در انتظار</option><option value="approved">تأییدشده</option><option value="rejected">ردشده</option></select></div>
+          <div class="field field--inline"><label for="fltFrom">از تاریخ (شمسی)</label><div class="date-control"><input id="fltFrom" type="text" inputmode="numeric" placeholder="۱۴۰۵/۰۸/۰۱" autocomplete="off" /><button class="calendar-trigger" type="button" data-calendar-target="fltFrom" data-calendar-mode="date" aria-label="انتخاب تاریخ شروع" aria-haspopup="dialog" aria-controls="jalaliDialog"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="16" rx="2"/><path d="M8 3v4m8-4v4M4 9h16"/></svg></button></div></div>
+          <div class="field field--inline"><label for="fltTo">تا تاریخ (شمسی)</label><div class="date-control"><input id="fltTo" type="text" inputmode="numeric" placeholder="۱۴۰۵/۰۸/۳۰" autocomplete="off" /><button class="calendar-trigger" type="button" data-calendar-target="fltTo" data-calendar-mode="date" aria-label="انتخاب تاریخ پایان" aria-haspopup="dialog" aria-controls="jalaliDialog"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="16" rx="2"/><path d="M8 3v4m8-4v4M4 9h16"/></svg></button></div></div>
+          <button class="btn btn--ghost btn--filter-reset" id="resetFilters" type="button">حذف فیلترها</button>
+        </div>
+        <div class="table-wrap">
+          <table class="table"><thead><tr>
+            <th scope="col" aria-sort="descending"><button class="sort-button" type="button" data-sort="date" aria-label="مرتب‌سازی بر اساس تاریخ">تاریخ <span aria-hidden="true">↕</span></button></th>
+            <th scope="col"><button class="sort-button" type="button" data-sort="title" aria-label="مرتب‌سازی بر اساس شرح">شرح <span aria-hidden="true">↕</span></button></th>
+            <th scope="col">دسته</th><th scope="col">واحد</th>
+            <th scope="col" class="num"><button class="sort-button" type="button" data-sort="amount" aria-label="مرتب‌سازی بر اساس مبلغ">مبلغ (ریال) <span aria-hidden="true">↕</span></button></th>
+            <th scope="col">وضعیت</th><th scope="col">عملیات</th>
+          </tr></thead><tbody id="tableBody"></tbody></table>
+          <p class="empty" id="emptyState" hidden>هنوز هزینه‌ای ثبت نشده است. از دکمه «هزینه جدید» شروع کن.</p>
+        </div>
+        <div class="pagination" id="pagination" aria-label="صفحه‌بندی فهرست هزینه‌ها">
+          <label class="page-size" for="pageSize">تعداد در صفحه <select id="pageSize"><option value="5">۵</option><option value="10" selected>۱۰</option><option value="20">۲۰</option></select></label>
+          <div class="pagination__controls"><button class="btn btn--ghost btn--sm" id="prevPage" type="button" disabled>صفحه قبل</button><span id="pageInfo" aria-live="polite">صفحهٔ ۱ از ۱</span><button class="btn btn--ghost btn--sm" id="nextPage" type="button" disabled>صفحه بعد</button></div>
+        </div>
+      </section>
+
+      <section class="card tools-card" data-page-view="settings" aria-labelledby="toolsTitle">
+        <div class="card__head"><div><span class="section-kicker">امنیت و نگهداری داده</span><h2 id="toolsTitle">تنظیمات و مدیریت اطلاعات</h2></div><span class="muted">اطلاعات روی همین مرورگر ذخیره می‌شوند</span></div>
+        <a class="help-entry" href="help.html"><span class="help-entry__icon" aria-hidden="true">?</span><span><strong>راهنمای کامل استفاده</strong><small>آموزش مرحله‌به‌مرحله ثبت هزینه، مدیریت بودجه، گزارش‌گیری و نگهداری اطلاعات</small></span><span class="help-entry__arrow" aria-hidden="true">←</span></a>
+        <div class="tools-grid">
+          <article class="tool-item"><span class="tool-item__icon" aria-hidden="true">↓</span><div><h3>پشتیبان‌گیری از اطلاعات</h3><p>دریافت نسخه JSON شامل هزینه‌ها و بودجه‌ها برای نگهداری یا انتقال.</p></div><button class="btn btn--soft" id="backupBtn" type="button">دریافت پشتیبان</button></article>
+          <article class="tool-item"><span class="tool-item__icon" aria-hidden="true">↑</span><div><h3>بازیابی اطلاعات</h3><p>بازگردانی اطلاعات از فایل پشتیبان JSON. داده‌های فعلی جایگزین می‌شوند.</p></div><label class="btn btn--soft file-button" for="restoreInput">انتخاب فایل پشتیبان</label><input class="visually-hidden" id="restoreInput" type="file" accept="application/json,.json" /></article>
+          <article class="tool-item"><span class="tool-item__icon" aria-hidden="true">▥</span><div><h3>داده‌های نمایشی</h3><p>بارگذاری رکوردهای نمونه برای نمایش نمودارها و امکانات به کارفرما.</p></div><button class="btn btn--soft" id="demoDataBtn" type="button">بارگذاری داده نمونه</button></article>
+          <article class="tool-item"><span class="tool-item__icon" aria-hidden="true">⇩</span><div><h3>خروجی Excel (CSV)</h3><p>دریافت فهرست هزینه‌ها و فیلترهای اعمال‌شده برای بررسی در صفحه‌گسترده.</p></div><button class="btn btn--soft" id="exportCsvBtn" type="button">دریافت خروجی CSV</button></article>
+        </div>
+        <p class="micro-note">نکته: این نسخه فرانت‌اند است؛ برای داده‌های حساس سازمانی، دسترسی چندکاربره و همگام‌سازی، اتصال به بک‌اند و احراز هویت لازم است.</p>
+      </section>
+
+      <footer class="app-footer"><span>هزینه‌بان · نمونه‌کار مدیریت هزینه</span><span>طراحی واکنش‌گرا · بدون وابستگی به کتابخانه خارجی</span></footer>
+    </main>
+    <nav class="mobile-nav" aria-label="ناوبری اصلی موبایل">
+      <a href="index.html" data-page-link="dashboard"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="5" rx="2"/><rect x="13" y="10" width="8" height="11" rx="2"/><rect x="3" y="13" width="8" height="8" rx="2"/></svg><span>خانه</span></a>
+      <a href="expenses.html" data-page-link="expenses"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10l3 3v15H4V3h3Zm0 0v4h10V3M8 12h8m-8 4h8"/></svg><span>هزینه‌ها</span></a>
+      <a href="budget.html" data-page-link="budget"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>بودجه</span></a>
+      <a href="reports.html" data-page-link="reports"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V5m0 14h17M8 15l4-4 3 2 5-7"/></svg><span>گزارش‌ها</span></a>
+      <a href="settings.html" data-page-link="settings"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z"/><path d="m19.4 15 .1.1 1.4 1.1-1.4 2.4-1.7-.7a8 8 0 0 1-1.6.9l-.3 1.8h-2.8l-.3-1.8a8 8 0 0 1-1.6-.9l-1.7.7-1.4-2.4 1.4-1.1a8 8 0 0 1 0-1.9l-1.4-1.1 1.4-2.4 1.7.7a8 8 0 0 1 1.6-.9l.3-1.8h2.8l.3 1.8a8 8 0 0 1 1.6.9l1.7-.7 1.4 2.4-1.4 1.1a8 8 0 0 1 0 1.9Z"/></svg><span>بیشتر</span></a>
+    </nav>
+  </div>
+
+  <dialog class="jalali-dialog" id="jalaliDialog" aria-labelledby="jalaliTitle">
+    <div class="jalali-dialog__body">
+      <header class="jalali-dialog__head">
+        <button class="btn btn--icon" id="jalaliPrev" type="button" aria-label="دوره قبلی"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 5-7 7 7 7"/></svg></button>
+        <h2 id="jalaliTitle">انتخاب تاریخ</h2>
+        <button class="btn btn--icon" id="jalaliNext" type="button" aria-label="دوره بعدی"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m10 5 7 7-7 7"/></svg></button>
+      </header>
+      <div class="jalali-month-grid" id="jalaliMonthGrid" hidden></div>
+      <div class="jalali-date-view" id="jalaliDateView">
+        <div class="jalali-weekdays" aria-hidden="true"><span>ش</span><span>ی</span><span>د</span><span>س</span><span>چ</span><span>پ</span><span>ج</span></div>
+        <div class="jalali-days" id="jalaliDays"></div>
+      </div>
+      <footer class="jalali-dialog__footer">
+        <button class="btn btn--text" id="jalaliToday" type="button">امروز</button>
+        <button class="btn btn--ghost" id="jalaliClose" type="button">بستن</button>
+      </footer>
+    </div>
+  </dialog>
+  <dialog class="confirm-dialog" id="confirmDialog" aria-labelledby="confirmTitle" aria-describedby="confirmMessage">
+    <form method="dialog" class="confirm-dialog__body">
+      <span class="confirm-dialog__mark" aria-hidden="true">!</span>
+      <h2 id="confirmTitle">تأیید عملیات</h2>
+      <p id="confirmMessage"></p>
+      <div class="confirm-dialog__actions"><button class="btn btn--ghost" value="cancel">انصراف</button><button class="btn btn--primary" id="confirmAccept" value="confirm">تأیید و ادامه</button></div>
+    </form>
+  </dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true" hidden></div>
+  <script src="js/store.js" defer></script>
+  <script src="js/ui.js" defer></script>
+  <script src="js/app.js" defer></script>
+</body>
+</html>

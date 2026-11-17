@@ -1,0 +1,13 @@
+﻿.DS_Store
+Thumbs.db
+desktop.ini
+.env
+.env.*
+!.env.example
+*.log
+npm-debug.log*
+.vscode/
+.idea/
+AUDIT-REPORT-2.8.md
+REDESIGN-NOTES.md
+vercel.json
